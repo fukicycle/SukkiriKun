@@ -92,5 +92,11 @@ namespace SukkiriKun
         {
             shortItemCutManager.AddGroup();
         }
+
+        private void ListBoxLoaded(object sender, RoutedEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            (listBox.Tag as ShortCutItemGroup).ListBox = listBox;
+        }
     }
 }

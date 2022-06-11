@@ -57,7 +57,7 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <GroupBox Header="{Binding Header}">
-                                <ListBox ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" AllowDrop="True" Drop="FileDrop">
+                                <ListBox Tag="{Binding}" Loaded="ListBoxLoaded" ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" AllowDrop="True" Drop="FileDrop">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel Orientation="Horizontal"/>

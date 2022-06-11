@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace SukkiriKun
 {
@@ -10,5 +11,6 @@ namespace SukkiriKun
     {
         public string Header { get; set; }
         public List<ShortCutItemControl> Items { get; set; }
+        public ListBox ListBox { get; set; }
     }
 }
