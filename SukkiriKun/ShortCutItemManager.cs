@@ -10,19 +10,19 @@ namespace SukkiriKun
 {
     public class ShortCutItemManager
     {
-        private ShortCutItemFileAccessManager shortCutItemFileAccessManager = new ShortCutItemFileAccessManager();
+        private ShortCutItemFileAccessManager shortCutFileAccessManager = new ShortCutItemFileAccessManager();
 
         public void GetShortCutItemFromFile()
         {
-            if (shortCutItemFileAccessManager.Load(out string contents))
-                Repository.ShortCutItemGroups = JsonConvert.DeserializeObject<List<ShortCutItemGroup>>(contents);
-            else MessageBox.Show(shortCutItemFileAccessManager.ErrorMsg);
+            if (shortCutFileAccessManager.Load(out string contents))
+                JsonConvert.DeserializeObject<List<ShortCutItemGroup>>(contents).ForEach(a => Repository.ShortCutItemGroups.Add(a));
+            else MessageBox.Show(shortCutFileAccessManager.ErrorMsg);
         }
 
         public void WriteShortCutItemToFile()
         {
-            if (shortCutItemFileAccessManager.Write(JsonConvert.SerializeObject(Repository.ShortCutItemGroups))) return;
-            MessageBox.Show(shortCutItemFileAccessManager.ErrorMsg);
+            if (shortCutFileAccessManager.Write(JsonConvert.SerializeObject(Repository.ShortCutItemGroups))) return;
+            MessageBox.Show(shortCutFileAccessManager.ErrorMsg);
         }
     }
 }

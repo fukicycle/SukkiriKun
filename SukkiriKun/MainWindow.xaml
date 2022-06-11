@@ -47,14 +47,17 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="すっきり君"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="すっきり君" VerticalAlignment="Center"/>
+                        <Button Style="{StaticResource ButtonStyle}" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" Click="CreateGroupButtonOnClick" Width="20" Height="20" Margin="5 0 5 0"/>
+                    </StackPanel>
                     <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Grid.Column="1" Click="CloseButtonOnClick" Width="20" Height="20"/>
                 </Grid>
                 <ListBox x:Name="mainContentsListBox" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Margin="5">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <GroupBox Header="{Binding Header}">
-                                <ListBox ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ListBox ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" AllowDrop="True" Drop="FileDrop">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel Orientation="Horizontal"/>

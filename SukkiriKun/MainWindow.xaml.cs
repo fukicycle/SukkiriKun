@@ -69,5 +69,44 @@ namespace SukkiriKun
                 }
             }
         }
+
+        private void FileDrop(object sender, DragEventArgs e)
+        {
+            foreach (string fileName in e.Data.GetData(DataFormats.FileDrop) as string[])
+            {
+                List<ShortCutItemControl> item = new List<ShortCutItemControl>();
+                item.Add(new ShortCutItemControl(new ShortCutItem
+                {
+                    Title = "Drop here!",
+                    Icon = FileIconManager.GetIconFromFile(fileName),
+                    OriginalName = "",
+                    OriginalPath = "",
+                    WorkingDirectory = ""
+                }));
+                Repository.ShortCutItemGroups.Add(new ShortCutItemGroup
+                {
+                    Header = "Test",
+                    Items = item
+                });
+            }
+        }
+
+        private void CreateGroupButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            List<ShortCutItemControl> item = new List<ShortCutItemControl>();
+            item.Add(new ShortCutItemControl(new ShortCutItem
+            {
+                Title = "Drop here!",
+                Icon = null,
+                OriginalName = "",
+                OriginalPath = "",
+                WorkingDirectory = ""
+            }));
+            Repository.ShortCutItemGroups.Add(new ShortCutItemGroup
+            {
+                Header = "Test",
+                Items = item
+            });
+        }
     }
 }

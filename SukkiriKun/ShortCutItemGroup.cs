@@ -9,6 +9,6 @@ namespace SukkiriKun
     public class ShortCutItemGroup
     {
         public string Header { get; set; }
-        public List<ShortCutItem> Items { get; set; }
+        public List<ShortCutItemControl> Items { get; set; }
     }
 }

@@ -21,7 +21,10 @@ namespace SukkiriKun
             try
             {
                 if (!DirectoryExists()) Directory.CreateDirectory(new FileInfo(REPOSITORY_FILE_NAME).DirectoryName);
-                File.Create(REPOSITORY_FILE_NAME).Dispose();
+                using (StreamWriter sw = new StreamWriter(REPOSITORY_FILE_NAME))
+                {
+                    sw.Write("[]");
+                }
             }
             catch (Exception ex)
             {

@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="FileAccessManager.cs" />
+    <Compile Include="FileIconManager.cs" />
     <Compile Include="FileOperationManager.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Setting.cs" />
