@@ -36,7 +36,7 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Border CornerRadius="20" Background="#F8F9FC" Padding="10">
+        <Border CornerRadius="20" Background="#F8F9FC" Padding="10" x:Name="mainContensPanel">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -50,8 +50,28 @@
                     <TextBlock Text="すっきり君"/>
                     <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Grid.Column="1" Click="CloseButtonOnClick" Width="20" Height="20"/>
                 </Grid>
+                <ListBox x:Name="mainContentsListBox" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Margin="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <GroupBox Header="{Binding Header}">
+                                <ListBox ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+                            </GroupBox>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
             </Grid>
         </Border>
-        <Label x:Name="switchLabel" Style="{StaticResource SwitchLabelStyle}" Content="非表示" Width="50" Height="50" Grid.Row="1" HorizontalAlignment="Left"/>
+        <Label x:Name="switchLabel" Style="{StaticResource SwitchLabelStyle}" Content="非表示" Width="50" Height="50" Grid.Row="1" HorizontalAlignment="Left" MouseLeftButtonDown="switchLabel_MouseLeftButtonDown"/>
     </Grid>
 </Window>
