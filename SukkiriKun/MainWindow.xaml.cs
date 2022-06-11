@@ -72,41 +72,25 @@ namespace SukkiriKun
 
         private void FileDrop(object sender, DragEventArgs e)
         {
+            var list = (sender as ListBox).ItemsSource as List<ShortCutItemControl>;
+            List<string> exceptFiles = new List<string>();
             foreach (string fileName in e.Data.GetData(DataFormats.FileDrop) as string[])
             {
-                List<ShortCutItemControl> item = new List<ShortCutItemControl>();
-                item.Add(new ShortCutItemControl(new ShortCutItem
+                if (fileName.Contains(".lnk"))
                 {
-                    Title = "Drop here!",
-                    Icon = FileIconManager.GetIconFromFile(fileName),
-                    OriginalName = "",
-                    OriginalPath = "",
-                    WorkingDirectory = ""
-                }));
-                Repository.ShortCutItemGroups.Add(new ShortCutItemGroup
-                {
-                    Header = "Test",
-                    Items = item
-                });
+                    exceptFiles.Add(fileName);
+                    continue;
+                }
+                shortItemCutManager.AddFile(fileName, list);
+                (sender as ListBox).Items.Refresh();
             }
+            if (exceptFiles.Count > 0)
+                MessageBox.Show($"Can not add following file.\r\nNote:This system is not accepted .lnk.\r\n{string.Join("\r\n", exceptFiles)}");
         }
 
         private void CreateGroupButtonOnClick(object sender, RoutedEventArgs e)
         {
-            List<ShortCutItemControl> item = new List<ShortCutItemControl>();
-            item.Add(new ShortCutItemControl(new ShortCutItem
-            {
-                Title = "Drop here!",
-                Icon = null,
-                OriginalName = "",
-                OriginalPath = "",
-                WorkingDirectory = ""
-            }));
-            Repository.ShortCutItemGroups.Add(new ShortCutItemGroup
-            {
-                Header = "Test",
-                Items = item
-            });
+            shortItemCutManager.AddGroup();
         }
     }
 }
