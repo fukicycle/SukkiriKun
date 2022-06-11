@@ -16,14 +16,34 @@ namespace SukkiriKun
 
         public void GetShortCutItemFromFile()
         {
+            List<ShortCutItemData> items = null;
             if (shortCutFileAccessManager.Load(out string contents))
-                JsonConvert.DeserializeObject<List<ShortCutItemGroup>>(contents).ForEach(a => Repository.ShortCutItemGroups.Add(a));
+                //JsonConvert.DeserializeObject<List<ShortCutItemGroup>>(contents).ForEach(a => Repository.ShortCutItemGroups.Add(a));
+                items = JsonConvert.DeserializeObject<List<ShortCutItemData>>(contents);
             else MessageBox.Show(shortCutFileAccessManager.ErrorMsg);
+            ConvertToVisualList(items);
+        }
+
+        private void ConvertToVisualList(List<ShortCutItemData> shortCutItemData)
+        {
+            shortCutItemData.ForEach(a =>
+            {
+                List<ShortCutItemControl> controls = new List<ShortCutItemControl>();
+                a.Items.ForEach(b =>
+                {
+                    controls.Add(new ShortCutItemControl(b));
+                });
+                Repository.ShortCutItemGroups.Add(new ShortCutItemGroup
+                {
+                    Header = a.Header,
+                    Items = controls
+                });
+            });
         }
 
         public void WriteShortCutItemToFile()
         {
-            if (shortCutFileAccessManager.Write(JsonConvert.SerializeObject(Repository.ShortCutItemGroups))) return;
+            if (shortCutFileAccessManager.Write(JsonConvert.SerializeObject(Repository.ShortCutItemGroups.Select(a => new ShortCutItemData { Header = a.Header, Items = a.Items.Select(b => b._shortCutItem).ToList() })))) return;
             MessageBox.Show(shortCutFileAccessManager.ErrorMsg);
         }
 
@@ -33,7 +53,7 @@ namespace SukkiriKun
             item.Add(new ShortCutItemControl(new ShortCutItem
             {
                 Title = "Drop here!",
-                Icon = new BitmapImage(new Uri("DragDropIcon.png", UriKind.Relative)),
+                Icon = FileIconManager.ConvertToByteArrayFromBitmapSource(new BitmapImage(new Uri("DragDropIcon.png", UriKind.Relative))),
                 OriginalName = "",
                 OriginalPath = "",
                 WorkingDirectory = ""
@@ -43,6 +63,7 @@ namespace SukkiriKun
                 Header = "Test",
                 Items = item
             });
+            WriteShortCutItemToFile();
         }
 
         public void AddFile(string fileName, List<ShortCutItemControl> shortCutItemControls)
@@ -56,6 +77,7 @@ namespace SukkiriKun
                 OriginalPath = fileName,
                 WorkingDirectory = fi.DirectoryName
             }));
+            WriteShortCutItemToFile();
         }
     }
 }

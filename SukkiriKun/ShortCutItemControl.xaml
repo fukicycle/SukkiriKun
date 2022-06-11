@@ -20,7 +20,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Button Style="{StaticResource ButtonStyle}" Width="20" Height="20" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Grid.Row="0" Grid.Column="1" FontSize="14"/>
-            <Image Width="100" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Icon}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <Image Width="100" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Icon,TargetNullValue=DefaultIcon.png}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Title}" TextAlignment="Center" Foreground="White"/>
         </Grid>
     </Border>

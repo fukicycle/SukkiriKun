@@ -6,20 +6,34 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Media.Imaging;
 using System.Windows.Interop;
+using System.IO;
 
 namespace SukkiriKun
 {
     public class FileIconManager
     {
+        public static byte[] ConvertToByteArrayFromBitmapSource(BitmapSource bitmapSource)
+        {
+            PngBitmapEncoder encoder = new PngBitmapEncoder();
+            byte[] bit = new byte[0];
+            using (MemoryStream stream = new MemoryStream())
+            {
+                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                encoder.Save(stream);
+                bit = stream.ToArray();
+                stream.Close();
+            }
+            return bit;
+        }
 
-        public static BitmapSource GetIconFromFile(string filePath)
+        public static byte[] GetIconFromFile(string filePath)
         {
             // アプリケーション・アイコンを取得
             SHFILEINFO shinfo = new SHFILEINFO();
             IntPtr hSuccess = SHGetFileInfo(filePath, 0, ref shinfo, (uint)Marshal.SizeOf(shinfo), SHGFI_ICON | SHGFI_LARGEICON);
             if (hSuccess != IntPtr.Zero)
             {
-                return Imaging.CreateBitmapSourceFromHIcon(shinfo.hIcon, System.Windows.Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                return ConvertToByteArrayFromBitmapSource(Imaging.CreateBitmapSourceFromHIcon(shinfo.hIcon, System.Windows.Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions()));
             }
             return null;
         }

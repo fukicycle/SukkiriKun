@@ -64,6 +64,7 @@
     <Compile Include="FileOperationManager.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Setting.cs" />
+    <Compile Include="ShortCutItemData.cs" />
     <Compile Include="ShortCutItemFileAccessManager.cs" />
     <Compile Include="ShortCutItem.cs" />
     <Compile Include="ShortCutItemControl.xaml.cs">
@@ -117,6 +118,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DefaultIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="DragDropIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

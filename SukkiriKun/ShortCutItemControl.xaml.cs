@@ -20,8 +20,10 @@ namespace SukkiriKun
     /// </summary>
     public partial class ShortCutItemControl : UserControl
     {
+        public ShortCutItem _shortCutItem = null;
         public ShortCutItemControl(ShortCutItem shortCutItem)
         {
+            _shortCutItem = shortCutItem;
             InitializeComponent();
             DataContext = shortCutItem;
         }
