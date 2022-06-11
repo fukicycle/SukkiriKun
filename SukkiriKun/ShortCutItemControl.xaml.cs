@@ -37,6 +37,7 @@ namespace SukkiriKun
 
         private void DeleteButtonOnClick(object sender, RoutedEventArgs e)
         {
+            if (_shortCutItem.OriginalName == String.Empty) return;
             var shortCutItemGroup = Repository.ShortCutItemGroups.FirstOrDefault(a => a.Items.Contains(this));
             shortCutItemGroup.Items.Remove(this);
             shortCutItemGroup.ListBox.Items.Refresh();
