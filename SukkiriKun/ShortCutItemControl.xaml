@@ -9,7 +9,7 @@
              Height="200"
              MouseLeftButtonUp="ShortCutItemOnClick"
              Width="150">
-    <Border Background="#363F72" CornerRadius="10" Padding="5">
+    <Border Background="#717BBC" CornerRadius="10" Padding="5">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
