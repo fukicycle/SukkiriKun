@@ -12,39 +12,46 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Height="450" Width="800">
     <Window.Resources>
-        <Style x:Key="CloseButtonStyle" TargetType="Button">
+        <Style x:Key="SwitchLabelStyle" TargetType="Label">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="Label">
                         <Grid>
-                            <Ellipse Fill="{TemplateBinding Background}" Width="20" Height="20"/>
+                            <Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
                             <ContentControl Foreground="White" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="#4E5BA6"/>
+            <Setter Property="Background" Value="#039855"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#9EA5D1"/>
+                    <Setter Property="Background" Value="#32D583"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Border CornerRadius="20" Background="#F8F9FC" Padding="10">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border CornerRadius="20" Background="#F8F9FC" Padding="10">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="すっきり君"/>
-                <Button Style="{StaticResource CloseButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Grid.Column="1" Click="CloseButtonOnClick"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="すっきり君"/>
+                    <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Grid.Column="1" Click="CloseButtonOnClick" Width="20" Height="20"/>
+                </Grid>
             </Grid>
-        </Grid>
-    </Border>
+        </Border>
+        <Label x:Name="switchLabel" Style="{StaticResource SwitchLabelStyle}" Content="非表示" Width="50" Height="50" Grid.Row="1" HorizontalAlignment="Left"/>
+    </Grid>
 </Window>
