@@ -10,7 +10,7 @@
         WindowStyle="None"
         Topmost="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Height="450" Width="800">
+        Height="450" Width="830">
     <Window.Resources>
         <Style x:Key="SwitchLabelStyle" TargetType="Label">
             <Setter Property="Template">
@@ -56,15 +56,22 @@
                 <ListBox x:Name="mainContentsListBox" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Margin="5">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <GroupBox Header="{Binding Header}">
-                                <ListBox Tag="{Binding}" Loaded="ListBoxLoaded" ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" AllowDrop="True" Drop="FileDrop">
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
-                            </GroupBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <GroupBox Header="{Binding Header}">
+                                    <ListBox Tag="{Binding}" Loaded="ListBoxLoaded" ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" AllowDrop="True" Drop="FileDrop">
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                    </ListBox>
+                                </GroupBox>
+                                <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Width="20" Height="20" VerticalAlignment="Top" Grid.Column="1"/>
+                            </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.ItemsPanel>
