@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SukkiriKun"
              mc:Ignorable="d" 
-             FontSize="16"
-             Height="150"
+             FontSize="14"
+             Height="120"
              MouseLeftButtonUp="ShortCutItemOnClick"
-             Width="100">
-    <Border Background="#717BBC" CornerRadius="10" Padding="5">
+             Width="90">
+    <Border Background="#717BBC" CornerRadius="10" Padding="5" ToolTip="{Binding Title}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -21,7 +21,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Button Style="{StaticResource ButtonStyle}" Width="20" Height="20" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Grid.Row="0" Grid.Column="1" FontSize="14" Click="DeleteButtonOnClick"/>
-            <Image Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Icon,TargetNullValue=DefaultIcon.png}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <Image Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Icon,TargetNullValue=DefaultIcon.png}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Title}" TextAlignment="Center" Foreground="White"/>
         </Grid>
     </Border>
