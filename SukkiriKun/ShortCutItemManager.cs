@@ -88,9 +88,10 @@ namespace SukkiriKun
             WriteShortCutItemToFile();
         }
 
-        public void DeleteGroup()
+        public void DeleteGroup(ShortCutItemGroup shortCutItemGroup)
         {
-
+            Repository.ShortCutItemGroups.Remove(shortCutItemGroup);
+            WriteShortCutItemToFile();
         }
     }
 }

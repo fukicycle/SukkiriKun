@@ -70,7 +70,7 @@
                                         </ListBox.ItemsPanel>
                                     </ListBox>
                                 </GroupBox>
-                                <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Width="20" Height="20" VerticalAlignment="Top" Grid.Column="1"/>
+                                <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Width="20" Height="20" VerticalAlignment="Top" Grid.Column="1" Click="DeleteGroupButtonOnClick" Tag="{Binding}"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

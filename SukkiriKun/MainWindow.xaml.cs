@@ -98,5 +98,11 @@ namespace SukkiriKun
             var listBox = sender as ListBox;
             (listBox.Tag as ShortCutItemGroup).ListBox = listBox;
         }
+
+        private void DeleteGroupButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            var item = (sender as Button).Tag as ShortCutItemGroup;
+            shortItemCutManager.DeleteGroup(item);
+        }
     }
 }
