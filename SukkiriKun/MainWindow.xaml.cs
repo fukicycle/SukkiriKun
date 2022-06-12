@@ -19,7 +19,7 @@ namespace SukkiriKun
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, NotifyChanged
     {
         private ShortCutItemFileOperationManager shortCutItemFileOperationManager = new ShortCutItemFileOperationManager();
         private ShortCutItemManager shortItemCutManager = new ShortCutItemManager();
@@ -29,7 +29,7 @@ namespace SukkiriKun
             InitializeComponent();
             if (shortCutItemFileOperationManager.Create())
             {
-                shortItemCutManager.GetShortCutItemFromFile();
+                shortItemCutManager.GetShortCutItemFromFile(this);
                 mainContentsListBox.ItemsSource = Repository.ShortCutItemGroups;
             }
             else
@@ -83,7 +83,7 @@ namespace SukkiriKun
                     exceptFiles.Add(fileName);
                     continue;
                 }
-                shortItemCutManager.AddFile(fileName, list);
+                shortItemCutManager.AddFile(fileName, list, this);
                 (sender as ListBox).Items.Refresh();
             }
             if (exceptFiles.Count > 0)
@@ -117,7 +117,7 @@ namespace SukkiriKun
                 errorMsgTextBlock.Text = "グループ名が空です";
                 return;
             }
-            shortItemCutManager.AddGroup(groupNameTextBox.Text);
+            shortItemCutManager.AddGroup(groupNameTextBox.Text, this);
             FinalizeDialogPanel();
         }
 
@@ -151,6 +151,12 @@ namespace SukkiriKun
         private void OkErrorButtonOnClick(object sender, RoutedEventArgs e)
         {
             FinalizeDialogPanel();
+        }
+
+        public void ItemClicked()
+        {
+            mainContensPanel.Visibility = Visibility.Collapsed;
+            switchLabel.Content = "表示";
         }
     }
 }

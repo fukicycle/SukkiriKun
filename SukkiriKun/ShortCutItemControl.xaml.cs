@@ -23,17 +23,22 @@ namespace SukkiriKun
     {
         public ShortCutItem _shortCutItem = null;
         private ShortCutItemManager shortCutItemManager = new ShortCutItemManager();
-        public ShortCutItemControl(ShortCutItem shortCutItem)
+        private NotifyChanged _notifyChanged;
+        public ShortCutItemControl(ShortCutItem shortCutItem, NotifyChanged notifyChanged)
         {
             _shortCutItem = shortCutItem;
             InitializeComponent();
             DataContext = shortCutItem;
+            _notifyChanged = notifyChanged;
         }
 
         private void ShortCutItemOnClick(object sender, MouseButtonEventArgs e)
         {
             if (_shortCutItem != null && _shortCutItem.OriginalName != String.Empty)
+            {
                 Process.Start(_shortCutItem.OriginalName);
+                _notifyChanged.ItemClicked();
+            }
         }
 
         private void DeleteButtonOnClick(object sender, RoutedEventArgs e)

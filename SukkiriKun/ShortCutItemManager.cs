@@ -14,24 +14,24 @@ namespace SukkiriKun
     {
         private ShortCutItemFileAccessManager shortCutFileAccessManager = new ShortCutItemFileAccessManager();
 
-        public void GetShortCutItemFromFile()
+        public void GetShortCutItemFromFile(NotifyChanged notifyChanged)
         {
             List<ShortCutItemData> items = null;
             if (shortCutFileAccessManager.Load(out string contents))
                 //JsonConvert.DeserializeObject<List<ShortCutItemGroup>>(contents).ForEach(a => Repository.ShortCutItemGroups.Add(a));
                 items = JsonConvert.DeserializeObject<List<ShortCutItemData>>(contents);
             else MessageBox.Show(shortCutFileAccessManager.ErrorMsg);
-            ConvertToVisualList(items);
+            ConvertToVisualList(items, notifyChanged);
         }
 
-        private void ConvertToVisualList(List<ShortCutItemData> shortCutItemData)
+        private void ConvertToVisualList(List<ShortCutItemData> shortCutItemData, NotifyChanged notifyChanged)
         {
             shortCutItemData.ForEach(a =>
             {
                 List<ShortCutItemControl> controls = new List<ShortCutItemControl>();
                 a.Items.ForEach(b =>
                 {
-                    controls.Add(new ShortCutItemControl(b));
+                    controls.Add(new ShortCutItemControl(b, notifyChanged));
                 });
                 Repository.ShortCutItemGroups.Add(new ShortCutItemGroup
                 {
@@ -47,7 +47,7 @@ namespace SukkiriKun
             MessageBox.Show(shortCutFileAccessManager.ErrorMsg);
         }
 
-        public void AddGroup(string groupName)
+        public void AddGroup(string groupName, NotifyChanged notifyChanged)
         {
             List<ShortCutItemControl> item = new List<ShortCutItemControl>();
             item.Add(new ShortCutItemControl(new ShortCutItem
@@ -57,7 +57,7 @@ namespace SukkiriKun
                 OriginalName = "",
                 OriginalPath = "",
                 WorkingDirectory = ""
-            }));
+            }, notifyChanged));
             Repository.ShortCutItemGroups.Add(new ShortCutItemGroup
             {
                 Header = groupName,
@@ -66,7 +66,7 @@ namespace SukkiriKun
             WriteShortCutItemToFile();
         }
 
-        public void AddFile(string fileName, List<ShortCutItemControl> shortCutItemControls)
+        public void AddFile(string fileName, List<ShortCutItemControl> shortCutItemControls, NotifyChanged notifyChanged)
         {
             FileInfo fi = new FileInfo(fileName);
             shortCutItemControls.Add(new ShortCutItemControl(new ShortCutItem
@@ -76,7 +76,7 @@ namespace SukkiriKun
                 OriginalName = fileName,
                 OriginalPath = fileName,
                 WorkingDirectory = fi.DirectoryName
-            }));
+            }, notifyChanged));
             WriteShortCutItemToFile();
         }
 
