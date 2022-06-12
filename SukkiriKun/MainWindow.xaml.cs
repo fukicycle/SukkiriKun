@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,6 +23,7 @@ namespace SukkiriKun
     {
         private ShortCutItemFileOperationManager shortCutItemFileOperationManager = new ShortCutItemFileOperationManager();
         private ShortCutItemManager shortItemCutManager = new ShortCutItemManager();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -85,12 +87,15 @@ namespace SukkiriKun
                 (sender as ListBox).Items.Refresh();
             }
             if (exceptFiles.Count > 0)
-                MessageBox.Show($"Can not add following file.\r\nNote:This system is not accepted .lnk.\r\n{string.Join("\r\n", exceptFiles)}");
+            {
+                InitializeErrorDialog();
+                errorMsgTextBlock.Text = $"以下のファイルを追加することはできません。\r\nこのアプリでは「.lnk」ファイルの追加は許可されていません。\r\n{string.Join("\r\n", exceptFiles)}";
+            }
         }
 
         private void CreateGroupButtonOnClick(object sender, RoutedEventArgs e)
         {
-            addGroupPanel.Visibility = Visibility.Visible;
+            InitializeAddDialog();
         }
 
         private void ListBoxLoaded(object sender, RoutedEventArgs e)
@@ -113,19 +118,39 @@ namespace SukkiriKun
                 return;
             }
             shortItemCutManager.AddGroup(groupNameTextBox.Text);
-            FinalizeAddPanel();
+            FinalizeDialogPanel();
         }
 
         private void CancelButtonOnClick(object sender, RoutedEventArgs e)
         {
-            FinalizeAddPanel();
+            FinalizeDialogPanel();
         }
 
-        private void FinalizeAddPanel()
+        private void FinalizeDialogPanel()
         {
             groupNameTextBox.Text = "";
             errorMsgTextBlock.Text = "";
+            dialogPanel.Visibility = Visibility.Collapsed;
+            okErrorButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void InitializeErrorDialog()
+        {
+            dialogPanel.Visibility = Visibility.Visible;
             addGroupPanel.Visibility = Visibility.Collapsed;
+            okErrorButton.Visibility = Visibility.Visible;
+        }
+
+        private void InitializeAddDialog()
+        {
+            dialogPanel.Visibility = Visibility.Visible;
+            addGroupPanel.Visibility = Visibility.Visible;
+            okErrorButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void OkErrorButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            FinalizeDialogPanel();
         }
     }
 }
