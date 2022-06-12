@@ -62,6 +62,7 @@
     <Compile Include="FileAccessManager.cs" />
     <Compile Include="FileIconManager.cs" />
     <Compile Include="FileOperationManager.cs" />
+    <Compile Include="NotifyChanged.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="ShortCutItemData.cs" />
