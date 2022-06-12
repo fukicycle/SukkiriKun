@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SukkiriKun")]
-[assembly: AssemblyCopyright("Copyright ©  2022")]
+[assembly: AssemblyCopyright("© 2022 Fuki Sato.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
