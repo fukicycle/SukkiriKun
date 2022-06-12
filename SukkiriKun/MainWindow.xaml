@@ -53,33 +53,37 @@
                     </StackPanel>
                     <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Grid.Column="1" Click="CloseButtonOnClick" Width="20" Height="20"/>
                 </Grid>
-                <ListBox x:Name="mainContentsListBox" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Margin="5">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
-                                <GroupBox Header="{Binding Header}">
-                                    <ListBox Tag="{Binding}" Loaded="ListBoxLoaded" ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" AllowDrop="True" Drop="FileDrop">
-                                        <ListBox.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal"/>
-                                            </ItemsPanelTemplate>
-                                        </ListBox.ItemsPanel>
-                                    </ListBox>
-                                </GroupBox>
-                                <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Width="20" Height="20" VerticalAlignment="Top" Grid.Column="1" Click="DeleteGroupButtonOnClick" Tag="{Binding}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListBox>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False" Margin="15">
+                    <Border Background="#EAECF5" CornerRadius="20" Padding="10" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+                        <ItemsControl x:Name="mainContentsItemsControl" Margin="5">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <GroupBox Header="{Binding Header}">
+                                            <ItemsControl Tag="{Binding}" Loaded="ListBoxLoaded" ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" AllowDrop="True" Drop="FileDrop">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                            </ItemsControl>
+                                        </GroupBox>
+                                        <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Width="20" Height="20" VerticalAlignment="Top" Grid.Column="1" Click="DeleteGroupButtonOnClick" Tag="{Binding}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </Border>
+                </ScrollViewer>
             </Grid>
         </Border>
         <Label x:Name="switchLabel" Style="{StaticResource SwitchLabelStyle}" Content="非表示" Width="50" Height="50" Grid.Row="1" HorizontalAlignment="Left" MouseLeftButtonDown="switchLabel_MouseLeftButtonDown"/>

@@ -30,7 +30,7 @@ namespace SukkiriKun
             if (shortCutItemFileOperationManager.Create())
             {
                 shortItemCutManager.GetShortCutItemFromFile(this);
-                mainContentsListBox.ItemsSource = Repository.ShortCutItemGroups;
+                mainContentsItemsControl.ItemsSource = Repository.ShortCutItemGroups;
             }
             else
             {
@@ -43,6 +43,7 @@ namespace SukkiriKun
             try
             {
                 DragMove();
+                RaiseEvent(e);
             }
             catch (Exception ex)
             {
@@ -74,7 +75,7 @@ namespace SukkiriKun
 
         private void FileDrop(object sender, DragEventArgs e)
         {
-            var list = (sender as ListBox).ItemsSource as List<ShortCutItemControl>;
+            var list = (sender as ItemsControl).ItemsSource as List<ShortCutItemControl>;
             List<string> exceptFiles = new List<string>();
             foreach (string fileName in e.Data.GetData(DataFormats.FileDrop) as string[])
             {
@@ -84,7 +85,7 @@ namespace SukkiriKun
                     continue;
                 }
                 shortItemCutManager.AddFile(fileName, list, this);
-                (sender as ListBox).Items.Refresh();
+                (sender as ItemsControl).Items.Refresh();
             }
             if (exceptFiles.Count > 0)
             {
@@ -100,8 +101,8 @@ namespace SukkiriKun
 
         private void ListBoxLoaded(object sender, RoutedEventArgs e)
         {
-            var listBox = sender as ListBox;
-            (listBox.Tag as ShortCutItemGroup).ListBox = listBox;
+            var itemsControl = sender as ItemsControl;
+            (itemsControl.Tag as ShortCutItemGroup).ItemsControl = itemsControl;
         }
 
         private void DeleteGroupButtonOnClick(object sender, RoutedEventArgs e)

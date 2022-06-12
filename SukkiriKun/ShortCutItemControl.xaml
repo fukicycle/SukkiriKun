@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              FontSize="14"
              Height="120"
-             MouseLeftButtonUp="ShortCutItemOnClick"
+             Margin="5"
+             MouseLeftButtonDown="ShortCutItemOnClick"
              Width="90">
     <Border Background="#717BBC" CornerRadius="10" Padding="5" ToolTip="{Binding Title}">
         <Grid>

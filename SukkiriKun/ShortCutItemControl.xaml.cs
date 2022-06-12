@@ -36,8 +36,8 @@ namespace SukkiriKun
         {
             if (_shortCutItem != null && _shortCutItem.OriginalName != String.Empty)
             {
-                Process.Start(_shortCutItem.OriginalName);
                 _notifyChanged.ItemClicked();
+                Process.Start(_shortCutItem.OriginalName);
             }
         }
 

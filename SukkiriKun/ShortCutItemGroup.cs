@@ -11,6 +11,6 @@ namespace SukkiriKun
     {
         public string Header { get; set; }
         public List<ShortCutItemControl> Items { get; set; }
-        public ListBox ListBox { get; set; }
+        public ItemsControl ItemsControl { get; set; }
     }
 }
