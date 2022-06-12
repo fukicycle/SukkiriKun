@@ -9,6 +9,7 @@
         Background="Transparent"
         WindowStyle="None"
         Topmost="True"
+        ShowInTaskbar="False"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Height="450" Width="830">
     <Window.Resources>
