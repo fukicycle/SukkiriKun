@@ -90,7 +90,7 @@ namespace SukkiriKun
 
         private void CreateGroupButtonOnClick(object sender, RoutedEventArgs e)
         {
-            shortItemCutManager.AddGroup();
+            addGroupPanel.Visibility = Visibility.Visible;
         }
 
         private void ListBoxLoaded(object sender, RoutedEventArgs e)
@@ -103,6 +103,29 @@ namespace SukkiriKun
         {
             var item = (sender as Button).Tag as ShortCutItemGroup;
             shortItemCutManager.DeleteGroup(item);
+        }
+
+        private void OkButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            if (groupNameTextBox.Text == string.Empty)
+            {
+                errorMsgTextBlock.Text = "グループ名が空です";
+                return;
+            }
+            shortItemCutManager.AddGroup(groupNameTextBox.Text);
+            FinalizeAddPanel();
+        }
+
+        private void CancelButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            FinalizeAddPanel();
+        }
+
+        private void FinalizeAddPanel()
+        {
+            groupNameTextBox.Text = "";
+            errorMsgTextBlock.Text = "";
+            addGroupPanel.Visibility = Visibility.Collapsed;
         }
     }
 }

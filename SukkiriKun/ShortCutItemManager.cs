@@ -47,7 +47,7 @@ namespace SukkiriKun
             MessageBox.Show(shortCutFileAccessManager.ErrorMsg);
         }
 
-        public void AddGroup()
+        public void AddGroup(string groupName)
         {
             List<ShortCutItemControl> item = new List<ShortCutItemControl>();
             item.Add(new ShortCutItemControl(new ShortCutItem
@@ -60,7 +60,7 @@ namespace SukkiriKun
             }));
             Repository.ShortCutItemGroups.Add(new ShortCutItemGroup
             {
-                Header = "Test",
+                Header = groupName,
                 Items = item
             });
             WriteShortCutItemToFile();

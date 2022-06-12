@@ -83,5 +83,15 @@
             </Grid>
         </Border>
         <Label x:Name="switchLabel" Style="{StaticResource SwitchLabelStyle}" Content="非表示" Width="50" Height="50" Grid.Row="1" HorizontalAlignment="Left" MouseLeftButtonDown="switchLabel_MouseLeftButtonDown"/>
+        <Border Background="#363F72" CornerRadius="20" Opacity="0.97" Name="addGroupPanel" Visibility="Collapsed">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Style="{StaticResource ModernTextBox}" x:Name="groupNameTextBox" Width="200"/>
+                    <Button Style="{StaticResource ButtonStyle}" Content="&#xE8FB;" FontFamily="Segoe MDL2 Assets" Width="35" Height="35" Foreground="#039855" FontSize="20" Margin="5" Click="OkButtonOnClick"/>
+                    <Button Style="{StaticResource ButtonStyle}" Content="&#xE711;" FontFamily="Segoe MDL2 Assets" Width="35" Height="35" Foreground="Red" FontSize="20" Margin="5" Click="CancelButtonOnClick"/>
+                </StackPanel>
+                <TextBlock x:Name="errorMsgTextBlock" Foreground="#F8F9FC"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

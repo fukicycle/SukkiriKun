@@ -10,7 +10,7 @@
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
-                            <ContentControl Foreground="White" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <ContentControl Foreground="{TemplateBinding Foreground}" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -21,6 +21,32 @@
                     <Setter Property="Background" Value="#9EA5D1"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" x:Key="ModernTextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border CornerRadius="10" Background="#EAECF5" Width="200" Height="40">
+                            <Grid>
+                                <Rectangle StrokeThickness="1"/>
+                                <TextBox Margin="1" Background="Transparent" Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="0" VerticalContentAlignment="Center" Padding="5" Foreground="#293056" x:Name="TextBox"/>
+                                <TextBlock IsHitTestVisible="False" Text="グループ名" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0" FontSize="11" Foreground="#717BBC" Grid.Column="1">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text,ElementName=TextBox}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>
