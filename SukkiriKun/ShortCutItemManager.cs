@@ -79,5 +79,18 @@ namespace SukkiriKun
             }));
             WriteShortCutItemToFile();
         }
+
+        public void DeleteFile(ShortCutItemControl shortCutItemControl)
+        {
+            var shortCutItemGroup = Repository.ShortCutItemGroups.FirstOrDefault(a => a.Items.Contains(shortCutItemControl));
+            shortCutItemGroup.Items.Remove(shortCutItemControl);
+            shortCutItemGroup.ListBox.Items.Refresh();
+            WriteShortCutItemToFile();
+        }
+
+        public void DeleteGroup()
+        {
+
+        }
     }
 }

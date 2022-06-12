@@ -22,6 +22,7 @@ namespace SukkiriKun
     public partial class ShortCutItemControl : UserControl
     {
         public ShortCutItem _shortCutItem = null;
+        private ShortCutItemManager shortCutItemManager = new ShortCutItemManager();
         public ShortCutItemControl(ShortCutItem shortCutItem)
         {
             _shortCutItem = shortCutItem;
@@ -38,9 +39,7 @@ namespace SukkiriKun
         private void DeleteButtonOnClick(object sender, RoutedEventArgs e)
         {
             if (_shortCutItem.OriginalName == String.Empty) return;
-            var shortCutItemGroup = Repository.ShortCutItemGroups.FirstOrDefault(a => a.Items.Contains(this));
-            shortCutItemGroup.Items.Remove(this);
-            shortCutItemGroup.ListBox.Items.Refresh();
+            shortCutItemManager.DeleteFile(this);
         }
     }
 }
