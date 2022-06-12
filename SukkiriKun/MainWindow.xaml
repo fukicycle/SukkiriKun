@@ -49,9 +49,9 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="すっきり君" VerticalAlignment="Center"/>
-                        <Button Style="{StaticResource ButtonStyle}" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" Click="CreateGroupButtonOnClick" Width="20" Height="20" Margin="5 0 5 0"/>
+                        <Button Style="{StaticResource ButtonStyle}" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" Click="CreateGroupButtonOnClick" Width="20" Height="20" Margin="5 0 5 0" Foreground="#F8F9FC"/>
                     </StackPanel>
-                    <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Grid.Column="1" Click="CloseButtonOnClick" Width="20" Height="20"/>
+                    <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Grid.Column="1" Click="CloseButtonOnClick" Width="20" Height="20" Foreground="#F8F9FC"/>
                 </Grid>
                 <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False" Margin="15">
                     <Border Background="#EAECF5" CornerRadius="20" Padding="10" MouseLeftButtonDown="Window_MouseLeftButtonDown">
@@ -72,7 +72,7 @@
                                                 </ItemsControl.ItemsPanel>
                                             </ItemsControl>
                                         </GroupBox>
-                                        <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Width="20" Height="20" VerticalAlignment="Top" Grid.Column="1" Click="DeleteGroupButtonOnClick" Tag="{Binding}"/>
+                                        <Button Style="{StaticResource ButtonStyle}" Content="&#xE894;" FontFamily="Segoe MDL2 Assets" Width="20" Height="20" VerticalAlignment="Top" Grid.Column="1" Click="DeleteGroupButtonOnClick" Tag="{Binding}" Foreground="#F8F9FC"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
