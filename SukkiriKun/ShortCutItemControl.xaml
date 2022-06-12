@@ -10,7 +10,7 @@
              Margin="5"
              MouseLeftButtonDown="ShortCutItemOnClick"
              Width="90">
-    <Border Background="#717BBC" CornerRadius="10" Padding="5" ToolTip="{Binding Title}">
+    <Border CornerRadius="10" Padding="5" ToolTip="{Binding Title}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -25,5 +25,15 @@
             <Image Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Icon,TargetNullValue=DefaultIcon.png}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Title}" TextAlignment="Center" Foreground="White"/>
         </Grid>
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="#717BBC"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#9EA5D1"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
     </Border>
 </UserControl>
