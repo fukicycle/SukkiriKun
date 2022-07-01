@@ -9,5 +9,6 @@ namespace SukkiriKun
     public interface NotifyChanged
     {
         void ItemClicked();
+        void ThrowException(string message);
     }
 }

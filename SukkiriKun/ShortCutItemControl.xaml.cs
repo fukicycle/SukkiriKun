@@ -36,8 +36,15 @@ namespace SukkiriKun
         {
             if (_shortCutItem != null && _shortCutItem.OriginalName != String.Empty)
             {
-                _notifyChanged.ItemClicked();
-                Process.Start(_shortCutItem.OriginalName);
+                try
+                {
+                    _notifyChanged.ItemClicked();
+                    Process.Start(_shortCutItem.OriginalName);
+                }
+                catch (Exception ex)
+                {
+                    _notifyChanged.ThrowException($"{ex.Message}\nFile:{_shortCutItem.OriginalPath}");
+                }
             }
         }
 

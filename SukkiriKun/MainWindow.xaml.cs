@@ -159,5 +159,11 @@ namespace SukkiriKun
             mainContensPanel.Visibility = Visibility.Collapsed;
             switchLabel.Content = "表示";
         }
+
+        public void ThrowException(string message)
+        {
+            InitializeErrorDialog();
+            errorMsgTextBlock.Text = message;
+        }
     }
 }
