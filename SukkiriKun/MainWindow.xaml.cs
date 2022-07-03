@@ -168,6 +168,8 @@ namespace SukkiriKun
             dialogPanel.Visibility = Visibility.Visible;
             addGroupPanel.Visibility = Visibility.Visible;
             okErrorButton.Visibility = Visibility.Collapsed;
+            groupNameTextBox.Focus();
+            groupNameTextBox.SelectAll();
         }
 
         private void OkErrorButtonOnClick(object sender, RoutedEventArgs e)
