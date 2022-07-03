@@ -30,7 +30,7 @@
                             <Grid>
                                 <Rectangle StrokeThickness="1"/>
                                 <TextBox Margin="1" Background="Transparent" Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="0" VerticalContentAlignment="Center" Padding="5" Foreground="#293056" x:Name="TextBox"/>
-                                <TextBlock IsHitTestVisible="False" Text="グループ名" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0" FontSize="11" Foreground="#717BBC" Grid.Column="1">
+                                <TextBlock IsHitTestVisible="False" Text="名前を入力" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0" FontSize="11" Foreground="#717BBC" Grid.Column="1">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Style.Triggers>

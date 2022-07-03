@@ -23,7 +23,7 @@ namespace SukkiriKun
     {
         private ShortCutItemFileOperationManager shortCutItemFileOperationManager = new ShortCutItemFileOperationManager();
         private ShortCutItemManager shortItemCutManager = new ShortCutItemManager();
-
+        private ShortCutItem editItem = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -113,12 +113,29 @@ namespace SukkiriKun
 
         private void OkButtonOnClick(object sender, RoutedEventArgs e)
         {
-            if (groupNameTextBox.Text == string.Empty)
+            if (editItem != null)
             {
-                errorMsgTextBlock.Text = "グループ名が空です";
-                return;
+                if (groupNameTextBox.Text == string.Empty)
+                {
+                    errorMsgTextBlock.Text = "ショートカット名が空です";
+                    return;
+                }
+                editItem.Title = groupNameTextBox.Text;
+                shortItemCutManager.UpdateFile();
+                editItem = null;
+                Repository.ShortCutItemGroups.Clear();
+                shortItemCutManager.GetShortCutItemFromFile(this);
+                mainContentsItemsControl.ItemsSource = Repository.ShortCutItemGroups;
             }
-            shortItemCutManager.AddGroup(groupNameTextBox.Text, this);
+            else
+            {
+                if (groupNameTextBox.Text == string.Empty)
+                {
+                    errorMsgTextBlock.Text = "グループ名が空です";
+                    return;
+                }
+                shortItemCutManager.AddGroup(groupNameTextBox.Text, this);
+            }
             FinalizeDialogPanel();
         }
 
@@ -144,6 +161,10 @@ namespace SukkiriKun
 
         private void InitializeAddDialog()
         {
+            if (editItem != null)
+            {
+                groupNameTextBox.Text = editItem.Title;
+            }
             dialogPanel.Visibility = Visibility.Visible;
             addGroupPanel.Visibility = Visibility.Visible;
             okErrorButton.Visibility = Visibility.Collapsed;
@@ -164,6 +185,12 @@ namespace SukkiriKun
         {
             InitializeErrorDialog();
             errorMsgTextBlock.Text = message;
+        }
+
+        public void ItemEdit(ShortCutItem shortCutItem)
+        {
+            editItem = shortCutItem;
+            InitializeAddDialog();
         }
     }
 }

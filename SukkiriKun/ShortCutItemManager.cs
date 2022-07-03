@@ -93,5 +93,10 @@ namespace SukkiriKun
             Repository.ShortCutItemGroups.Remove(shortCutItemGroup);
             WriteShortCutItemToFile();
         }
+
+        public void UpdateFile()
+        {
+            WriteShortCutItemToFile();
+        }
     }
 }

@@ -53,5 +53,11 @@ namespace SukkiriKun
             if (_shortCutItem.OriginalName == String.Empty) return;
             shortCutItemManager.DeleteFile(this);
         }
+
+        private void EditButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            if (_shortCutItem.OriginalName == String.Empty) return;
+            _notifyChanged.ItemEdit(_shortCutItem);
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace SukkiriKun
     {
         void ItemClicked();
         void ThrowException(string message);
+        void ItemEdit(ShortCutItem item);
     }
 }
