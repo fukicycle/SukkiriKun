@@ -62,15 +62,31 @@ namespace SukkiriKun
         {
             var list = (sender as ItemsControl).ItemsSource as List<ShortCutItemControl>;
             List<string> exceptFiles = new List<string>();
-            foreach (string fileName in e.Data.GetData(DataFormats.FileDrop) as string[])
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                if (fileName.Contains(".lnk"))
+                foreach (string fileName in e.Data.GetData(DataFormats.FileDrop) as string[])
                 {
-                    exceptFiles.Add(fileName);
-                    continue;
+                    if (fileName.Contains(".lnk"))
+                    {
+                        exceptFiles.Add(fileName);
+                        continue;
+                    }
+                    shortItemCutManager.AddFile(fileName, list, this);
+                    (sender as ItemsControl).Items.Refresh();
                 }
-                shortItemCutManager.AddFile(fileName, list, this);
-                (sender as ItemsControl).Items.Refresh();
+            }
+            else if (e.Data.GetDataPresent(DataFormats.Text))
+            {
+                string fileContents = e.Data.GetData(DataFormats.Text) as string;
+                if (fileContents.Contains(".lnk"))
+                {
+                    exceptFiles.Add(fileContents);
+                }
+                else
+                {
+                    shortItemCutManager.AddFile(fileContents, list, this, true);
+                    (sender as ItemsControl).Items.Refresh();
+                }
             }
             if (exceptFiles.Count > 0)
             {

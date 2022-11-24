@@ -66,17 +66,35 @@ namespace SukkiriKun
             WriteShortCutItemToFile();
         }
 
-        public void AddFile(string fileName, List<ShortCutItemControl> shortCutItemControls, NotifyChanged notifyChanged)
+        public void AddFile(string fileName, List<ShortCutItemControl> shortCutItemControls, NotifyChanged notifyChanged, bool isUrl = false)
         {
-            FileInfo fi = new FileInfo(fileName);
-            shortCutItemControls.Add(new ShortCutItemControl(new ShortCutItem
+            if (isUrl)
             {
-                Title = fi.Name,
-                Icon = FileIconManager.GetIconFromFile(fi.FullName),
-                OriginalName = fileName,
-                OriginalPath = fileName,
-                WorkingDirectory = fi.DirectoryName
-            }, notifyChanged));
+                if (!fileName.Contains("://"))
+                {
+                    fileName = "https://" + fileName;
+                }
+                shortCutItemControls.Add(new ShortCutItemControl(new ShortCutItem
+                {
+                    Title = fileName,
+                    Icon = null,
+                    OriginalName= fileName,
+                    OriginalPath= fileName,
+                    WorkingDirectory = null
+                }, notifyChanged));
+            }
+            else
+            {
+                FileInfo fi = new FileInfo(fileName);
+                shortCutItemControls.Add(new ShortCutItemControl(new ShortCutItem
+                {
+                    Title = fi.Name,
+                    Icon = FileIconManager.GetIconFromFile(fi.FullName),
+                    OriginalName = fileName,
+                    OriginalPath = fileName,
+                    WorkingDirectory = fi.DirectoryName
+                }, notifyChanged));
+            }
             WriteShortCutItemToFile();
         }
 

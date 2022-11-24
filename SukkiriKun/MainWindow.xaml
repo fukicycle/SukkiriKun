@@ -17,22 +17,53 @@
         Height="450" Width="830">
     <Window.Resources>
         <Style x:Key="MainPanelStyle" TargetType="Border">
+            <Style.Resources>
+                <Storyboard x:Key="StartStoryboard">
+                    <DoubleAnimation Storyboard.TargetProperty="(Border.Width)" Duration="0:0:0.15" To="830"/>
+                    <DoubleAnimation Storyboard.TargetProperty="(Border.Height)" Duration="0:0:0.15" To="450"/>
+                </Storyboard>
+                <Storyboard x:Key="EndStoryboard">
+                    <DoubleAnimation Storyboard.TargetProperty="(Border.Width)" Duration="0:0:0.1" To="10"/>
+                    <DoubleAnimation Storyboard.TargetProperty="(Border.Height)" Duration="0:0:0.1" To="10"/>
+                </Storyboard>
+            </Style.Resources>
             <Setter Property="Width" Value="10"/>
             <Setter Property="Height" Value="10"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="CornerRadius" Value="0 5 5 5"/>
+            <Setter Property="CornerRadius" Value="0 20 20 20"/>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="CornerRadius" Value="0 20 20 20"/>
-                    <Setter Property="Height" Value="450"/>
-                    <Setter Property="Width" Value="830"/>
-                </Trigger>
+                <EventTrigger RoutedEvent="DragEnter">
+                    <EventTrigger.Actions>
+                        <RemoveStoryboard BeginStoryboardName="Start1"/>
+                        <BeginStoryboard Storyboard="{StaticResource StartStoryboard}" x:Name="Start1"/>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="DragLeave">
+                    <EventTrigger.Actions>
+                        <RemoveStoryboard BeginStoryboardName="Start1"/>
+                        <RemoveStoryboard BeginStoryboardName="End1"/>
+                        <BeginStoryboard Storyboard="{StaticResource EndStoryboard}" x:Name="End1"/>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <EventTrigger.Actions>
+                        <RemoveStoryboard BeginStoryboardName="Start2"/>
+                        <BeginStoryboard Storyboard="{StaticResource StartStoryboard}" x:Name="Start2"/>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <EventTrigger.Actions>
+                        <RemoveStoryboard BeginStoryboardName="Start2"/>
+                        <RemoveStoryboard BeginStoryboardName="End2"/>
+                        <BeginStoryboard Storyboard="{StaticResource EndStoryboard}" x:Name="End2"/>
+                    </EventTrigger.Actions>
+                </EventTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid>
-        <Border Style="{StaticResource MainPanelStyle}" Background="#F8F9FC" Padding="10" x:Name="mainContensPanel" Grid.Row="1">
+        <Border AllowDrop="True" Style="{StaticResource MainPanelStyle}" Background="#F8F9FC" Padding="10" x:Name="mainContensPanel" Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
