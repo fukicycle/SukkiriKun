@@ -8,36 +8,31 @@
         AllowsTransparency="True"
         Background="Transparent"
         WindowStyle="None"
+        WindowStartupLocation="Manual"
+        Top="0"
+        Left="0"
         Topmost="True"
         ShowInTaskbar="False"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Height="450" Width="830">
     <Window.Resources>
-        <Style x:Key="SwitchLabelStyle" TargetType="Label">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Label">
-                        <Grid>
-                            <Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
-                            <ContentControl Foreground="White" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Background" Value="#039855"/>
+        <Style x:Key="MainPanelStyle" TargetType="Border">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="CornerRadius" Value="0 5 5 5"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#32D583"/>
+                    <Setter Property="CornerRadius" Value="0 20 20 20"/>
+                    <Setter Property="Height" Value="450"/>
+                    <Setter Property="Width" Value="830"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <Border CornerRadius="20" Background="#F8F9FC" Padding="10" x:Name="mainContensPanel">
+        <Border Style="{StaticResource MainPanelStyle}" Background="#F8F9FC" Padding="10" x:Name="mainContensPanel" Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -87,8 +82,7 @@
                 </ScrollViewer>
             </Grid>
         </Border>
-        <Label x:Name="switchLabel" Style="{StaticResource SwitchLabelStyle}" Content="非表示" Width="50" Height="50" Grid.Row="1" HorizontalAlignment="Left" MouseLeftButtonDown="switchLabel_MouseLeftButtonDown"/>
-        <Border Background="#363F72" CornerRadius="20" Opacity="0.97" Name="dialogPanel" Visibility="Collapsed">
+        <Border Background="#363F72" CornerRadius="20" Opacity="0.97" Name="dialogPanel" Visibility="Collapsed" Grid.Row="1">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Name="addGroupPanel">
                     <TextBox Style="{StaticResource ModernTextBox}" x:Name="groupNameTextBox" Width="200"/>

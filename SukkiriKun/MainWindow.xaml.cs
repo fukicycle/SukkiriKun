@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -56,22 +57,6 @@ namespace SukkiriKun
             App.Current.Shutdown();
         }
 
-        private void switchLabel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-            {
-                if (mainContensPanel.Visibility == Visibility.Visible)
-                {
-                    mainContensPanel.Visibility = Visibility.Collapsed;
-                    switchLabel.Content = "表示";
-                }
-                else
-                {
-                    mainContensPanel.Visibility = Visibility.Visible;
-                    switchLabel.Content = "非表示";
-                }
-            }
-        }
 
         private void FileDrop(object sender, DragEventArgs e)
         {
@@ -150,7 +135,11 @@ namespace SukkiriKun
             errorMsgTextBlock.Text = "";
             dialogPanel.Visibility = Visibility.Collapsed;
             okErrorButton.Visibility = Visibility.Collapsed;
+            SetCursorPos(0, 0);
         }
+
+        [DllImport("User32.dll")]
+        private static extern bool SetCursorPos(int X, int Y);
 
         private void InitializeErrorDialog()
         {
@@ -179,8 +168,6 @@ namespace SukkiriKun
 
         public void ItemClicked()
         {
-            mainContensPanel.Visibility = Visibility.Collapsed;
-            switchLabel.Content = "表示";
         }
 
         public void ThrowException(string message)
