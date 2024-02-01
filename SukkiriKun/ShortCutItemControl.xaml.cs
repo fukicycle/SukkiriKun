@@ -34,12 +34,16 @@ namespace SukkiriKun
 
         private void ShortCutItemOnClick(object sender, MouseButtonEventArgs e)
         {
-            if (_shortCutItem != null && _shortCutItem.OriginalName != String.Empty)
+            if (_shortCutItem != null && _shortCutItem.OriginalName != string.Empty)
             {
                 try
                 {
                     _notifyChanged.ItemClicked();
-                    Process.Start(_shortCutItem.OriginalName);
+                    ProcessStartInfo info = new ProcessStartInfo();
+                    info.FileName = _shortCutItem.OriginalName;
+                    info.UseShellExecute = true;
+                    info.WorkingDirectory = _shortCutItem.WorkingDirectory;
+                    Process.Start(info);
                 }
                 catch (Exception ex)
                 {
@@ -50,13 +54,13 @@ namespace SukkiriKun
 
         private void DeleteButtonOnClick(object sender, RoutedEventArgs e)
         {
-            if (_shortCutItem.OriginalName == String.Empty) return;
+            if (_shortCutItem.OriginalName == string.Empty) return;
             shortCutItemManager.DeleteFile(this);
         }
 
         private void EditButtonOnClick(object sender, RoutedEventArgs e)
         {
-            if (_shortCutItem.OriginalName == String.Empty) return;
+            if (_shortCutItem.OriginalName == string.Empty) return;
             _notifyChanged.ItemEdit(_shortCutItem);
         }
     }
