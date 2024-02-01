@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	  <RuntimeIdentifier>win-x86,win-x64</RuntimeIdentifier>
+	<RuntimeIdentifier>win-x86;win-x64</RuntimeIdentifier>
     <TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
