@@ -70,9 +70,9 @@ namespace SukkiriKun
         {
             if (isUrl)
             {
-                if (!fileName.Contains("://"))
+                if(!fileName.StartsWith("http"))
                 {
-                    fileName = "https://" + fileName;
+                    fileName = "http://" + fileName;
                 }
                 shortCutItemControls.Add(new ShortCutItemControl(new ShortCutItem
                 {

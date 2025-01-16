@@ -46,7 +46,7 @@ namespace SukkiriKun
                 DragMove();
                 RaiseEvent(e);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
